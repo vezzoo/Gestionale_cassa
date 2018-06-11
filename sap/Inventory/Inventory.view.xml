@@ -1,0 +1,73 @@
+<mvc:View
+        controllerName="App.Inventory"
+        xmlns:u="sap.ui.unified"
+        xmlns:c="sap.ui.core"
+        xmlns:mvc="sap.ui.core.mvc"
+        xmlns="sap.m">
+    <Page title="GESTIONE INVENTARIO" class="sapUiContentPadding"
+          showNavButton="false">
+        <headerContent>
+            <Button icon="sap-icon://bbyd-dashboard" tooltip="Vai alla dashboard" press="godash"/>
+            <Button icon="sap-icon://visits" tooltip="Esci" press="onExit"/>
+        </headerContent>
+        <content>
+            <Table id="idProductsTable" growing="true" growingThreshold="10">
+                <headerToolbar>
+                    <OverflowToolbar id="otbSubheader">
+                        <Title text="Magazzino" level="H2"/>
+                        <ToolbarSpacer/>
+                        <Button id="editButton" text="Modifica" type="Transparent"
+                                press="onEdit"/>
+                        <Button id="saveButton" text="Salva" type="Transparent"
+                                press="onSave" visible="false"/>
+                        <Button id="cancelButton" text="Annulla" type="Transparent"
+                                press="onCancel" visible="false"/>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column width="4em">
+                        <Button press="addNew" id="nuevo" text="Nuova" visible="false"/>
+                    </Column>
+                    <Column width="4em"><Text text=" "/></Column>
+                    <Column width="12em">
+                        <Text text="Nome"/>
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+                        <Text text="Descrizione"/>
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                        <Text text="Giacenza"/>
+                    </Column>
+                    <Column>
+                        <Text text="Prezzo"/>
+                    </Column>
+                    <Column hAlign="End">
+                        <Text text="Gruppo"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text=" "/>
+                            <Text text=" "/>
+                            <ObjectIdentifier title="{nome}" text="{id}"/>
+                            <ObjectIdentifier title="{desc}"/>
+                            <ObjectNumber number="{restano}"
+                                          state="{
+							path: 'restano',
+							formatter: 'App.Formatter.weightState'
+						}"/>
+                            <ObjectNumber
+                                    number="{
+								parts:[{path:'prezzo'}],
+								type: 'sap.ui.model.type.Currency',
+								formatOptions: {showMeasure: false}
+							}"/>
+                            <ObjectIdentifier title="{gruppo}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>
